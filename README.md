@@ -1,7 +1,7 @@
 PeP et al. Bachelor Kolloqium
 ===
 [Latest PDF Version](https://github.com/The-Ludwig/pep-bachelor-colloquium/releases/latest/download/pep-poster.pdf)
-[![Build LaTeX](https://github.com/The-Ludwig/pep-bachelor-colloquium/actions/workflows/build.yml/badge.svg)](https://github.com/The-Ludwig/pep-bachelor-colloquium.git/actions/workflows/build.yml)
+[![Build LaTeX](https://github.com/The-Ludwig/pep-bachelor-colloquium/actions/workflows/build.yml/badge.svg)](https://github.com/The-Ludwig/pep-bachelor-colloquium/actions/workflows/build.yml)
 
 The posters for the PeP-Bachelor Kolloqium.
 
