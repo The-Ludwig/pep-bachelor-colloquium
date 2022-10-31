@@ -60,11 +60,10 @@
 
   \begin{scope}[shift={($(current page.north)+(-9, -8)$)}]
     \node[anchor=west,text width=30\ulen, color=textColor] (pep) at (0, 0) {%
-    {\huge\bfseries PeP et al.~e.\kern-0.1333em V\kern-0.1333em.}\\[1ex]
+    {\Large\bfseries Bachelorkolloquien}\\
     {\setstretch{0.7}%
-    Physikstudierende und\\
-    ehemalige Physikstudierende\\
-    der TU Dortmund\par
+    {\bfseries im November}\\[1ex]
+    von PeP et al.~e.\kern-0.1333em V\kern-0.1333em.\par
     }
     };
     \begin{scope}[anchor=east, scale=5, shift={($(pep.west)+(-1, 0)$)}]
@@ -82,20 +81,24 @@
     \end{scope}
   \end{scope}
 
-  \node[text width=30\ulen, anchor=north, color=textColor, align=justify] at ($(current page.north)+(0, -16)$)
-  {Wir sind der ehemaligenverein und können uns keinen Demotext leisten! Waas! Keinen Demotext?
-    Kostet ein Demotext überhaupt etwas? Eigentlich nicht. Aber ich muss ja auch mal wieder in langen,
-    inhaltlich unanpspruchsvollen texten mein 10-finger-tippen üben! Wie wäre es jetzt eigentlich mit einer liste?
-    \begin{itemize}
-      \item Toller Punkt
-      \item kekse!
-    \end{itemize}
+  \node[align=justify, text width=35\ulen, anchor=north, color=textColor] (info) at ($(current page.north)+(0, -16)$)
+  {\footnotesize
+  Du möchtest nächstes Semester deine Bachelorarbeit schreiben, weißt aber noch nicht zu welchem Thema? Dann ist das Bachelor-Kolloquium genau richtig für dich.
+  Das Kolloquium findet montags von 12:15 Uhr bis ca. 13:15 Uhr im AV-Raum des Physik Gebäudes statt. Die Termine im November sind:
+  };
+  \node[text width=40\ulen, anchor=north, color=textColor, align=justify] at (info.south)
+  {
+    \begin{description}
+      \item[\bfseries 07.11.2022] Yanick Kind (AG Anders)
+      \item[\bfseries 14.11.2022] Katharina Popp und Tobias Knospe (AG Albrecht)
+      \item[\bfseries 28.11.2022] Till Willershausen (AG Cinchetti) 
+    \end{description}
   };
 
   \begin{scope}[shift={($(current page.west)+(39.5, -15)$)}, xscale=-9, yscale=9]
     % \fill[color=fillColor] (0, 0) circle[radius=1\ulen];
     \fill[
-      color=pepgray,
+      color=fillColor,
       line width=1pt,
       smooth,
       yscale=0.9,
@@ -105,8 +108,10 @@
       samples=200,
     ] plot (\x, {exp(-\x * \x) * cos(10 * deg(\x))}) -- ++(20, 0) -- ++(0, -20) -- ++(-40, 0) -- ++(0, 20)  -- cycle;
   \end{scope}
-  \node[anchor=south, color=white, text width=\linewidth, align=center] (link) at ($(current page.south)+(0, 5)$)
-  {\footnotesize Alle Infos kriegs'te hier: \\[1ex] \href{https://pep-dortmund.de/mitmachen.html}{https://pep-dortmund.de/mitmachen.html}};
+  \node[anchor=south, color=white, text width=\linewidth, align=center] (link) at ($(current page.south)+(0, 0)$)
+  {
+  \colorbox{white}{\includegraphics[width=.27\linewidth]{qr.pdf}}
+  \\[-.5ex] \href{https://pep-dortmund.de/vereinsleben/bachelorkolloquium.html}{\scriptsize \mbox{pep-dortmund.de/vereinsleben/bachelorkolloquium.html}}};
 \end{tikzpicture}
 
 \end{document}
