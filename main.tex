@@ -1,0 +1,112 @@
+\documentclass[fontsize=55pt,  paper=a2, pagesize]{scrartcl}
+% page number suppressed 
+\pagenumbering{gobble}
+% left aligned text
+\usepackage[document]{ragged2e}
+% load images
+\usepackage{graphicx}
+% to crop images more easily (Export overrides \includegraphics)
+%\usepackage[Export]{adjustbox}
+
+\usepackage[cmyk]{xcolor}
+\usepackage{setspace}
+
+\definecolor{pepgray}{HTML}{565656}
+\colorlet{strokeColor}{white}
+\colorlet{fillColor}{pepgray}
+\colorlet{textColor}{black}
+
+% set font almost like poster
+\usepackage{fontspec}
+\setmainfont{Roboto}
+\setsansfont{Roboto}
+\renewcommand{\familydefault}{\sfdefault}
+
+% get control over borders
+\usepackage[ a2paper, margin=1cm, %
+            ignoreall, noheadfoot, nomarginpar, %top=-1in %
+            %showframe %
+            ]{geometry}
+% use tikz
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{svg.path}
+
+% Hyperlinks
+\usepackage[
+  allbordercolors = pepgray,
+  unicode,        % Unicode in PDF-Attributen erlauben
+  pdfusetitle,    % Titel, Autoren und Datum als PDF-Attribute
+  pdfcreator={},  % ┐ PDF-Attribute säubern
+  pdfproducer={}, % ┘
+]{hyperref}
+
+\begin{document}
+\thispagestyle{empty}
+
+% set new length unit
+\newlength\ulen
+\setlength\ulen{1cm}
+\setlength\parindent{0cm}
+
+
+% use tikzpicture environment to move objects around 
+% options: use tikz as overlay, shift that (0,0) os upper left corner and set the default length units
+\begin{tikzpicture}[remember picture, overlay, shift=(current page.north west), x=\ulen, y=\ulen]
+  % test units and borders: 
+  %\draw[->] (0,0) -- (2,-2);
+  %\draw[line width=0.1cm] (current page.north west) rectangle (current page.south east);
+  % Logo jdpg
+
+  \begin{scope}[shift={($(current page.north)+(-9, -8)$)}]
+    \node[anchor=west,text width=30\ulen, color=textColor] (pep) at (0, 0) {%
+    {\huge\bfseries PeP et al.~e.\kern-0.1333em V\kern-0.1333em.}\\[1ex]
+    {\setstretch{0.7}%
+    Physikstudierende und\\
+    ehemalige Physikstudierende\\
+    der TU Dortmund\par
+    }
+    };
+    \begin{scope}[anchor=east, scale=5, shift={($(pep.west)+(-1, 0)$)}]
+      \fill[color=fillColor] (0, 0) circle[radius=1cm];
+      \draw[
+        color=strokeColor,
+        line width=1pt,
+        smooth,
+        yscale=0.9,
+        xscale=0.57,
+        xshift=-0.5cm,
+        domain=-1.20:2.25,
+        samples=200,
+      ] plot (\x, {exp(-\x * \x) * cos(10 * deg(\x))});
+    \end{scope}
+  \end{scope}
+
+  \node[text width=30\ulen, anchor=north, color=textColor, align=justify] at ($(current page.north)+(0, -16)$)
+  {Wir sind der ehemaligenverein und können uns keinen Demotext leisten! Waas! Keinen Demotext?
+    Kostet ein Demotext überhaupt etwas? Eigentlich nicht. Aber ich muss ja auch mal wieder in langen,
+    inhaltlich unanpspruchsvollen texten mein 10-finger-tippen üben! Wie wäre es jetzt eigentlich mit einer liste?
+    \begin{itemize}
+      \item Toller Punkt
+      \item kekse!
+    \end{itemize}
+  };
+
+  \begin{scope}[shift={($(current page.west)+(39.5, -15)$)}, xscale=-9, yscale=9]
+    % \fill[color=fillColor] (0, 0) circle[radius=1\ulen];
+    \fill[
+      color=pepgray,
+      line width=1pt,
+      smooth,
+      yscale=0.9,
+      xscale=0.57,
+      xshift=-0.5cm,
+      domain=-1.20:2.25,
+      samples=200,
+    ] plot (\x, {exp(-\x * \x) * cos(10 * deg(\x))}) -- ++(20, 0) -- ++(0, -20) -- ++(-40, 0) -- ++(0, 20)  -- cycle;
+  \end{scope}
+  \node[anchor=south, color=white, text width=\linewidth, align=center] (link) at ($(current page.south)+(0, 5)$)
+  {\footnotesize Alle Infos kriegs'te hier: \\[1ex] \href{https://pep-dortmund.de/mitmachen.html}{https://pep-dortmund.de/mitmachen.html}};
+\end{tikzpicture}
+
+\end{document}
