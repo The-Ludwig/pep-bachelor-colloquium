@@ -1,33 +1,37 @@
 \documentclass[fontsize=55pt,  paper=a2, pagesize]{scrartcl}
 % page number suppressed 
 \pagenumbering{gobble}
-% left aligned text
-\usepackage[document]{ragged2e}
-% load images
 \usepackage{graphicx}
-% to crop images more easily (Export overrides \includegraphics)
-%\usepackage[Export]{adjustbox}
-
-\usepackage[cmyk]{xcolor}
+% see https://tex.stackexchange.com/questions/614621/tabularray-and-rgb-xcolor-option
+\usepackage{xcolor}
+\usepackage{tabularray}
+\UseTblrLibrary{siunitx}
+\UseTblrLibrary{booktabs}
 \usepackage{setspace}
 
 \definecolor{pepgray}{HTML}{565656}
+\definecolor{peporange}{HTML}{FFB137}
 \colorlet{strokeColor}{white}
 \colorlet{fillColor}{pepgray}
 \colorlet{textColor}{black}
 
 % set font almost like poster
 \usepackage{fontspec}
-\setmainfont{Roboto}
-\setsansfont{Roboto}
-\renewcommand{\familydefault}{\sfdefault}
+\newfontfamily\bodyfont[]{Fira Sans}
+\newfontfamily\thinfont[]{Fira Sans Light}
+\newfontfamily\headingfont[]{Fira Sans Bold}
+\newfontfamily\emphfont[]{Fira Sans Italic}
+\newfontfamily\monofont[]{Fira Mono}
+\renewcommand{\em}{\emphfont\color{textcolor}}
+
+\setmainfont{Merriweather Regular}
 
 % get control over borders
 \usepackage[ a2paper, margin=1cm, %
             ignoreall, noheadfoot, nomarginpar, %top=-1in %
             %showframe %
             ]{geometry}
-% use tikz
+            % use tikz
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{svg.path}
@@ -41,6 +45,7 @@
   pdfproducer={}, % ┘
 ]{hyperref}
 
+
 \begin{document}
 \thispagestyle{empty}
 
@@ -49,25 +54,22 @@
 \setlength\ulen{1cm}
 \setlength\parindent{0cm}
 
-
 % use tikzpicture environment to move objects around 
 % options: use tikz as overlay, shift that (0,0) os upper left corner and set the default length units
 \begin{tikzpicture}[remember picture, overlay, shift=(current page.north west), x=\ulen, y=\ulen]
-  % test units and borders: 
-  %\draw[->] (0,0) -- (2,-2);
-  %\draw[line width=0.1cm] (current page.north west) rectangle (current page.south east);
-  % Logo jdpg
 
-  \begin{scope}[shift={($(current page.north)+(-9, -8)$)}]
-    \node[anchor=west,text width=30\ulen, color=textColor] (pep) at (0, 0) {%
-    {\Large\bfseries Bachelorkolloquien}\\
-    {\setstretch{0.7}%
-    {\bfseries im November}\\[1ex]
+  \begin{scope}[shift={($(current page.north)+(0, -3)$)}]
+    \node[anchor=north,text width=25\ulen, color=textColor] (pep) at (5.5\ulen, 0) {%
+    {\Large\headingfont Bachelorkolloquien}\\
+    {\setstretch{0.7}
+    {\headingfont im \monthname}\\[1ex]
+    \thinfont
     von PeP et al.~e.\kern-0.1333em V\kern-0.1333em.\par
     }
     };
+
     \begin{scope}[anchor=east, scale=5, shift={($(pep.west)+(-1, 0)$)}]
-      \fill[color=fillColor] (0, 0) circle[radius=1cm];
+      \fill[color=fillColor] (0, 0) circle[radius=1\ulen];
       \draw[
         color=strokeColor,
         line width=1pt,
@@ -81,21 +83,20 @@
     \end{scope}
   \end{scope}
 
-  \node[align=justify, text width=35\ulen, anchor=north, color=textColor] (info) at ($(current page.north)+(0, -16)$)
-  {\footnotesize
-  Du möchtest nächstes Semester deine Bachelorarbeit schreiben, weißt aber noch nicht zu welchem Thema? Dann ist das Bachelor-Kolloquium genau richtig für dich.
-  Das Kolloquium findet montags von 12:15 Uhr bis ca. 13:15 Uhr im AV-Raum des Physik Gebäudes statt. Die Termine im November sind:
-  };
-  \node[text width=40\ulen, anchor=north, color=textColor, align=justify] at (info.south)
+  \node (info) at ($(current page.north)+(0, -13)$)%
+  [anchor=north,color=textColor,text width=35\ulen,font=\fontsize{36pt}{42pt}\selectfont,align=justify]%
   {
-    \begin{description}
-      \item[\bfseries 07.11.2022] Yanick Kind (AG Anders)
-      \item[\bfseries 14.11.2022] Katharina Popp und Tobias Knospe (AG Albrecht)
-      \item[\bfseries 28.11.2022] Till Willershausen (AG Cinchetti) 
-    \end{description}
+    Du möchtest nächstes Semester deine Bachelorarbeit schreiben, weißt aber noch nicht zu welchem Thema? Dann ist das Bachelor-Kolloquium genau richtig für dich.\\
+    Das Kolloquium findet {\color{peporange} montags von 12:15 Uhr bis ca. 13:15 Uhr im AV-Raum} des Physik Gebäudes statt.
+  };
+  \node[anchor=north, color=textColor] at (info.south)
+  {
+    \centering
+    \fontsize{42pt}{42pt}\selectfont
+    \speakers
   };
 
-  \begin{scope}[shift={($(current page.west)+(39.5, -15)$)}, xscale=-9, yscale=9]
+  \begin{scope}[shift={($(current page.west)+(33.5, -16)$)}, xscale=-9, yscale=9]
     % \fill[color=fillColor] (0, 0) circle[radius=1\ulen];
     \fill[
       color=fillColor,
@@ -106,12 +107,12 @@
       xshift=-0.5cm,
       domain=-1.20:2.25,
       samples=200,
-    ] plot (\x, {exp(-\x * \x) * cos(10 * deg(\x))}) -- ++(20, 0) -- ++(0, -20) -- ++(-40, 0) -- ++(0, 20)  -- cycle;
+    ] plot (\x, {.5*exp(-(\x+10) * (\x+10)) * cos(10 * deg(\x))+.5*exp(-\x * \x) * cos(10 * deg(\x))}) -- ++(20, 0) -- ++(0, -20) -- ++(-40, 0) -- ++(0, 20)  -- cycle;
   \end{scope}
-  \node[anchor=south, color=white, text width=\linewidth, align=center] (link) at ($(current page.south)+(0, 0)$)
+  \node[anchor=south, color=white, text width=\linewidth, align=center] (link) at ($(current page.south)+(0, .5)$)
   {
-  \colorbox{white}{\includegraphics[width=.27\linewidth]{qr.pdf}}
-  \\[-.5ex] \href{https://pep-dortmund.de/vereinsleben/bachelorkolloquium.html}{\scriptsize \mbox{pep-dortmund.de/vereinsleben/bachelorkolloquium.html}}};
+    \colorbox{white}{\includegraphics[width=.2\linewidth]{qr.pdf}}
+    \\[-.5ex] \href{https://pep-dortmund.de/vereinsleben/bachelorkolloquium.html}{\scriptsize\monofont \mbox{pep-dortmund.de/vereinsleben/bachelorkolloquium.html}}};
 \end{tikzpicture}
 
 \end{document}

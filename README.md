@@ -18,7 +18,7 @@ make work
 
 # Dependencies 
 You need 
-- texlive 
+- texlive 22
 - make
 
 # Credits
