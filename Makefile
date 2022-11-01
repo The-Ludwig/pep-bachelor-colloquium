@@ -29,7 +29,7 @@ build:
 
 # Use this to work on tex-document, it will be updated continuesly by latexmk
 work: FORCE | build
-	$(TEXPREFIX) latexmk -pvc $(TEXOPTIONS) $(TEXSOURCE)
+	$(TEXPREFIX) latexmk -pvc $(TEXOPTIONS) -jobname=$(basename $(TEXTARGET)) -usepretex='\input{data/$(basename $(TEXTARGET)).tex}' $(TEXSOURCE)
 
 build/%.pdf: FORCE | build
 	$(TEXPREFIX) latexmk $(TEXOPTIONS) -jobname=$(basename $(@F)) -usepretex='\input{data/$(basename $(@F)).tex}' $(TEXSOURCE)
