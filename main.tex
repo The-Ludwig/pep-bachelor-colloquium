@@ -71,12 +71,12 @@
       \fill[color=fillColor] (0, 0) circle[radius=1\ulen];
       \draw[
         color=strokeColor,
-        line width=1pt,
+        line width=5pt,
         smooth,
         yscale=0.9,
         xscale=0.57,
         xshift=-0.5cm,
-        domain=-1.20:2.25,
+        domain=-1.25:2.28,
         samples=200,
       ] plot (\x, {exp(-\x * \x) * cos(10 * deg(\x))});
     \end{scope}
