@@ -1,5 +1,5 @@
 # TEXTARGET is the output filename TEXTSOURCE is input. Simply change these if you want to compile one .tex file 
-TEXTARGET:=2022-11.pdf
+TEXTARGET:=2022-12.pdf
 TEXSOURCE:=main.tex
 
 inputs := $(wildcard data/*.tex)

@@ -1,0 +1,23 @@
+\newcommand\monthname{Dezember}
+\newcommand\speakers{%
+  \begin{tblr}{width=\linewidth,
+    cell{odd}{1,3} = {r=2,c=1}{c},
+        cell{odd}{2} = {cmd=\bfseries },
+        % column{3} = {cmd=\scriptsize },
+        colspec={Q l l},
+        column{1}={rightsep+=1ex},
+        column{2}={rightsep+=1ex},
+        row{even}={belowsep+=1ex},
+        row{odd}={abovesep+=1ex},
+      }
+    \toprule
+    05.12.2022 & AG Reiter       & AV-Raum           \\
+               & Jan Ravi Bade   &                   \\
+    12.12.2022 & AG Uhrig        & CP-03-123         \\
+               & Benedikt Sander &                   \\
+    19.12.2022 & AG Stamou       & Zoom, Link online \\
+               & Jan Willeke     &                   \\%
+    \bottomrule
+  \end{tblr}
+}
+\newcommand\wo{montags von 12:15 Uhr bis ca. 13:15 Uhr im angegebenen Raum}
